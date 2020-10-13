@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the editing form for the tcs question type.
+ * Defines the editing form for the tcs judgment question type.
  *
  * @package qtype
- * @subpackage tcs
+ * @subpackage tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @copyright  based on work by 2014 Julien Girardot <julien.girardot@actimage.com>
@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * tcs question editing form definition.
+ * tcs judgment question editing form definition.
  *
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
@@ -39,7 +39,7 @@ defined('MOODLE_INTERNAL') || die();
 
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_tcs_edit_form extends question_edit_form {
+class qtype_tcsjudgment_edit_form extends question_edit_form {
 
     protected function definition_inner($mform) {
 
@@ -58,12 +58,6 @@ class qtype_tcs_edit_form extends question_edit_form {
         $mform->addElement('editor', 'hypothisistext', get_string('hypothisistext', 'qtype_tcs'), array('rows' => 5),
             $this->editoroptions);
 
-        $mform->addElement('text', 'labeleffecttext', get_string('labeleffecttext', 'qtype_tcs'), array('size' => 40));
-        $mform->setType('labeleffecttext', PARAM_TEXT);
-        $mform->addHelpButton('labeleffecttext', 'labeleffecttext', 'qtype_tcs');
-
-        $mform->addElement('editor', 'effecttext', get_string('effecttext', 'qtype_tcs'), array('rows' => 5), $this->editoroptions);
-
         $mform->addElement('text', 'labelnewinformationeffect',
                 get_string('labelnewinformationeffect', 'qtype_tcs'), array('size' => 40));
         $mform->setType('labelnewinformationeffect', PARAM_TEXT);
@@ -74,7 +68,7 @@ class qtype_tcs_edit_form extends question_edit_form {
         $mform->setType('labelfeedback', PARAM_TEXT);
 
         $this->add_per_answer_fields($mform, get_string('choiceno', 'qtype_tcs', '{no}'),
-                0, max(5, QUESTION_NUMANS_START));
+                0, max(4, QUESTION_NUMANS_START));
 
         $this->add_combined_feedback_fields(false);
 
@@ -98,7 +92,7 @@ class qtype_tcs_edit_form extends question_edit_form {
             $hypothisistext = $hypothisistext['text'];
         }
         $hypothisistext = file_prepare_draft_area($draftid, $this->context->id,
-                'qtype_tcs', 'hypothisistext', empty($question->id) ? null : (int) $question->id,
+                'qtype_tcsjudgment', 'hypothisistext', empty($question->id) ? null : (int) $question->id,
                 $this->fileoptions, $hypothisistext);
 
         $question->hypothisistext = array();
@@ -107,26 +101,6 @@ class qtype_tcs_edit_form extends question_edit_form {
             editors_get_preferred_format() : $question->options->hypothisistextformat;
         $question->hypothisistext['itemid'] = $draftid;
 
-        // Prepare hypothisis text.
-        $draftid = file_get_submitted_draft_itemid('effecttext');
-
-        if (!empty($question->options->effecttext)) {
-            $effecttext = $question->options->effecttext;
-        } else {
-            $effecttext = $this->_form->getElement('effecttext')->getValue();
-            $effecttext = $effecttext['text'];
-        }
-        $effecttext = file_prepare_draft_area($draftid, $this->context->id,
-                'qtype_tcs', 'effecttext', empty($question->id) ? null : (int) $question->id,
-                $this->fileoptions, $effecttext);
-
-        $question->effecttext = array();
-        $question->effecttext['text'] = $effecttext;
-        $question->effecttext['format'] = empty($question->options->effecttextformat) ?
-            editors_get_preferred_format() : $question->options->effecttextformat;
-        $question->effecttext['itemid'] = $draftid;
-
-        $question->labeleffecttext = empty($question->options->labeleffecttext) ? '' : $question->options->labeleffecttext;
         $question->labelhypothisistext = empty($question->options->labelhypothisistext) ?
             '' : $question->options->labelhypothisistext;
         $question->labelnewinformationeffect = empty($question->options->labelnewinformationeffect) ?
@@ -155,10 +129,10 @@ class qtype_tcs_edit_form extends question_edit_form {
         // Fill default values for answers.
         $renderer = $PAGE->get_renderer('core');
         if (!isset($this->question->options)) {
-            $nbanswers = max(5, QUESTION_NUMANS_START);
+            $nbanswers = max(4, QUESTION_NUMANS_START);
             for ($i = 0; $i < $nbanswers; $i++) {
                 $htmllikertscale = $renderer->render_from_template('qtype_tcs/texteditor_wrapper',
-                        ['text' => get_string('likertscale' . ($i + 1), 'qtype_tcs')]);
+                        ['text' => get_string('likertscale' . ($i + 1), 'qtype_tcsjudgment')]);
                 $mform->setDefault("answer[$i]", ['text' => $htmllikertscale]);
             }
         }
@@ -205,6 +179,6 @@ class qtype_tcs_edit_form extends question_edit_form {
     }
 
     public function qtype() {
-        return 'tcs';
+        return 'tcsjudgment';
     }
 }

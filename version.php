@@ -18,7 +18,7 @@
  * Version information for the sct question type.
  *
  * @package    qtype
- * @subpackage tcs
+ * @subpackage tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @copyright  based on work by 2014 Julien Girardot <julien.girardot@actimage.com>
@@ -27,10 +27,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'qtype_tcs';
-$plugin->version   = 2020071300;
+$plugin->component = 'qtype_tcsjudgment';
+$plugin->version   = 2020100900;
 $plugin->release = '1.0.0 (Build 2020071300)';
 
 $plugin->requires  = 2013110500;
+$plugin->dependencies = array(
+    'qtype_tcs' => 2020071300
+);
 
 $plugin->maturity  = MATURITY_STABLE;

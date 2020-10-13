@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * tcs question renderer class.
+ * tcs judgment question renderer class.
  *
  * @package qtype
- * @subpackage tcs
+ * @subpackage tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @copyright  based on work by 2014 Julien Girardot <julien.girardot@actimage.com>
@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * Generates the output for tcs questions.
+ * Generates the output for tcs judgment questions.
  *
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
@@ -39,7 +39,7 @@ defined('MOODLE_INTERNAL') || die();
 
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_tcs_renderer extends qtype_with_combined_feedback_renderer {
+class qtype_tcsjudgment_renderer extends qtype_with_combined_feedback_renderer {
     /**
      * Whether a choice should be considered right, wrong or partially right.
      * @param question_answer $ans representing one of the choices.
@@ -223,7 +223,7 @@ class qtype_tcs_renderer extends qtype_with_combined_feedback_renderer {
                 $str = $question->format_text($trimmedanswer, $answer->answerformat, $qa, 'question', 'answer', $answer->id);
                 $strfeedback .= html_writer::tag('p', html_writer::tag('strong', $str));
                 // Do not use $trimmedfeedback here, just a regular trim.
-                $strfeedback .= html_writer::start_tag('div', array('class' => 'answerspecificfeedback'));
+                $strfeedback .= html_writer::start_tag('div', array('class' => 'tcs-answerspecificfeedback'));
                 $strfeedback .= $question->format_text(trim($answer->feedback), $answer->feedbackformat,
                     $qa, 'question', 'answerfeedback', $answer->id);
                 $strfeedback .= html_writer::end_tag('div');
@@ -307,15 +307,15 @@ class qtype_tcs_renderer extends qtype_with_combined_feedback_renderer {
 }
 
 /**
- * An tcs format renderer for tcs where the student should use a plain input box.
+ * A format renderer for tcs judgment questions where the student should use a plain input box.
  *
  * @package qtype
- * @subpackage tcs
+ * @subpackage tcsjudgment
  * @copyright  2020 Université  de Montréal.
  * @author     Issam Taboubi <issam.taboubi@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_tcs_format_plain_renderer extends plugin_renderer_base {
+class qtype_tcsjudgment_format_plain_renderer extends plugin_renderer_base {
 
     /**
      * Return the HTML for the textarea.
@@ -325,7 +325,7 @@ class qtype_tcs_format_plain_renderer extends plugin_renderer_base {
      * @return string the HTML for the textarea.
      */
     protected function textarea($response, $attributes) {
-        $attributes['class'] = $this->class_name() . ' qtype_tcs_response';
+        $attributes['class'] = $this->class_name() . ' qtype_tcsjudgment_response';
         $attributes['rows'] = 7;
         $attributes['cols'] = 45;
         return html_writer::tag('textarea', s($response), $attributes);
@@ -337,7 +337,7 @@ class qtype_tcs_format_plain_renderer extends plugin_renderer_base {
      * @return string class name
      */
     protected function class_name() {
-        return 'qtype_tcs_plain';
+        return 'qtype_tcsjudgment_plain';
     }
 
     /**

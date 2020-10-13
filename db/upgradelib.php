@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Upgrade library code for the tcs question type.
+ * Upgrade library code for the tcs judgment question type.
  *
  * @package    qtype
- * @subpackage tcs
+ * @subpackage tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @copyright  based on work by 2014 Julien Girardot <julien.girardot@actimage.com>
@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * Class for converting attempt data for tcs questions when upgrading
+ * Class for converting attempt data for tcs judgment questions when upgrading
  * attempts to the new question engine.
  *
  * This class is used by the code in question/engine/upgrade/upgradelib.php.
@@ -40,11 +40,11 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  based on work by 2014 Julien Girardot <julien.girardot@actimage.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_tcs_qe2_attempt_updater extends question_qtype_attempt_updater {
+class qtype_tcsjudgment_qe2_attempt_updater extends question_qtype_attempt_updater {
     protected $order;
 
     public function is_blank_answer($state) {
-        // Blank tcs answers are not empty strings, they rather end in a colon.
+        // Blank tcs judgment answers are not empty strings, they rather end in a colon.
         return empty($state->answer) || substr($state->answer, -1) == ':';
     }
 
@@ -88,7 +88,7 @@ class qtype_tcs_qe2_attempt_updater extends question_qtype_attempt_updater {
             } else {
                 $this->logger->log_assumption("Dealing with a place where the
                         student selected a choice that was later deleted for
-                        tcs question {$this->question->id}");
+                        tcs judgment question {$this->question->id}");
                 return '[CHOICE THAT WAS LATER DELETED]';
             }
         } else {

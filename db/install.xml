@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="question/type/tcs/db" VERSION="20140730" COMMENT="XMLDB file for Moodle question/type/tcs"
+<XMLDB PATH="question/type/tcsjudgment/db" VERSION="20140730" COMMENT="XMLDB file for Moodle question/type/tcsjudgment"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="qtype_tcs_options" COMMENT="Options for tcs questions">
+    <TABLE NAME="qtype_tcsjudgment_options" COMMENT="Options for concordance of judgment questions">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Foreign key references question.id"/>
         <FIELD NAME="hypothisistext" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Hypothisis for the question."/>
         <FIELD NAME="hypothisistextformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="effecttext" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Effects on the hypothisis."/>
-        <FIELD NAME="effecttextformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="correctfeedback" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Feedback shown for any correct response."/>
         <FIELD NAME="correctfeedbackformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="partiallycorrectfeedback" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Feedback shown for any partially correct response."/>
         <FIELD NAME="partiallycorrectfeedbackformat" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="incorrectfeedback" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Feedback shown for any incorrect response."/>
         <FIELD NAME="incorrectfeedbackformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="labeleffecttext" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Label of Effects on the hypothisis."/>
         <FIELD NAME="labelhypothisistext" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Label of Hypothisis."/>
         <FIELD NAME="showquestiontext" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="If true, the text of question is displayed."/>
         <FIELD NAME="showfeedback" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="1" SEQUENCE="false" COMMENT="If true, the textarea feedback of question is displayed."/>

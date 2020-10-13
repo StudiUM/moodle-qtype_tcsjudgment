@@ -17,7 +17,7 @@
 /**
  * Provides the information to backup Concordance questions.
  *
- * @package    qtype_tcs
+ * @package    qtype_tcsjudgment
  * @subpackage backup-moodle2
  * @category   backup
  * @copyright  2020 Université de Montréal
@@ -30,14 +30,14 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Provides the information to backup Concordance questions.
  *
- * @package    qtype_tcs
+ * @package    qtype_tcsjudgment
  * @subpackage backup-moodle2
  * @category   backup
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_qtype_tcs_plugin extends backup_qtype_plugin {
+class backup_qtype_tcsjudgment_plugin extends backup_qtype_plugin {
 
     /**
      * Returns the qtype information to attach to question element
@@ -45,7 +45,7 @@ class backup_qtype_tcs_plugin extends backup_qtype_plugin {
     protected function define_question_plugin_structure() {
 
         // Define the virtual plugin element with the condition to fulfill.
-        $plugin = $this->get_plugin_element(null, '../../qtype', 'tcs');
+        $plugin = $this->get_plugin_element(null, '../../qtype', 'tcsjudgment');
 
         // Create one standard named plugin element (the visible container).
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
@@ -58,8 +58,8 @@ class backup_qtype_tcs_plugin extends backup_qtype_plugin {
         $this->add_question_question_answers($pluginwrapper);
 
         // Now create the qtype own structures.
-        $tcs = new backup_nested_element('tcs', array('id'), array(
-            'hypothisistext', 'hypothisistextformat', 'effecttext', 'effecttextformat', 'labeleffecttext', 'labelhypothisistext',
+        $tcs = new backup_nested_element('tcsjudgment', array('id'), array(
+            'hypothisistext', 'hypothisistextformat', 'labelhypothisistext',
             'showquestiontext', 'shownumcorrect',
             'correctfeedback', 'correctfeedbackformat',
             'partiallycorrectfeedback', 'partiallycorrectfeedbackformat',
@@ -70,7 +70,7 @@ class backup_qtype_tcs_plugin extends backup_qtype_plugin {
         $pluginwrapper->add_child($tcs);
 
         // Set source to populate the data.
-        $tcs->set_source_table('qtype_tcs_options',
+        $tcs->set_source_table('qtype_tcsjudgment_options',
                 array('questionid' => backup::VAR_PARENTID));
 
         // Don't need to annotate ids nor files.
@@ -86,8 +86,7 @@ class backup_qtype_tcs_plugin extends backup_qtype_plugin {
      */
     public static function get_qtype_fileareas() {
         return array(
-            'hypothisistext' => 'question_created',
-            'effecttext' => 'question_created',
+            'hypothisistext' => 'question_created'
         );
     }
 }

@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * tcs question definition class.
+ * Concordance of judgment question definition class.
  *
  * @package qtype
- * @subpackage tcs
+ * @subpackage tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @copyright  based on work by 2014 Julien Girardot <julien.girardot@actimage.com>
@@ -29,9 +29,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->dirroot . '/question/type/tcs/question.php');
 
 /**
- * Represents a tcs question.
+ * Represents a Concordance of judgment question.
  *
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
@@ -39,7 +40,7 @@ defined('MOODLE_INTERNAL') || die();
 
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_tcs_question extends question_graded_automatically {
+class qtype_tcsjudgment_question extends qtype_tcs_question {
     public $answers;
 
     public $hypothisistext;
@@ -168,11 +169,8 @@ class qtype_tcs_question extends question_graded_automatically {
         } else if ($component == 'question' && $filearea == 'hint') {
             return $this->check_hint_file_access($qa, $options, $args);
 
-        } else if ($component == 'qtype_tcs' && $filearea == 'hypothisistext') {
+        } else if ($component == 'qtype_tcsjudgment' && $filearea == 'hypothisistext') {
             return $qa->get_question()->hypothisistext && $args[0] == $this->id;
-
-        } else if ($component == 'qtype_tcs' && $filearea == 'effecttext') {
-            return $qa->get_question()->effecttext && $args[0] == $this->id;
 
         } else {
             return parent::check_file_access($qa, $options, $component, $filearea,
@@ -245,9 +243,9 @@ class qtype_tcs_question extends question_graded_automatically {
      * Get tcs format renderer.
      *
      * @param moodle_page $page the page we are outputting to.
-     * @return qtype_tcs_format_renderer_base the response-format-specific renderer.
+     * @return qtype_tcsjudgment_format_renderer_base the response-format-specific renderer.
      */
     public function get_format_renderer(moodle_page $page) {
-        return $page->get_renderer('qtype_tcs', 'format_plain');
+        return $page->get_renderer('qtype_tcsjudgment', 'format_plain');
     }
 }

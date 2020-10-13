@@ -17,7 +17,7 @@
 /**
  * Provides the information to restore Concordance questions.
  *
- * @package    qtype_tcs
+ * @package    qtype_tcsjudgment
  * @subpackage backup-moodle2
  * @category   backup
  * @copyright  2020 Université de Montréal
@@ -30,14 +30,14 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Provides the information to restore Concordance questions.
  *
- * @package    qtype_tcs
+ * @package    qtype_tcsjudgment
  * @subpackage backup-moodle2
  * @category   backup
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_qtype_tcs_plugin extends restore_qtype_plugin {
+class restore_qtype_tcsjudgment_plugin extends restore_qtype_plugin {
 
     /**
      * Returns the paths to be handled by the plugin at question level
@@ -49,20 +49,20 @@ class restore_qtype_tcs_plugin extends restore_qtype_plugin {
         $this->add_question_question_answers($paths);
 
         // Add own qtype stuff.
-        $elename = 'tcs';
+        $elename = 'tcsjudgment';
         // We used get_recommended_name() so this works.
-        $elepath = $this->get_pathfor('/tcs');
+        $elepath = $this->get_pathfor('/tcsjudgment');
         $paths[] = new restore_path_element($elename, $elepath);
 
         return $paths; // And we return the interesting paths.
     }
 
     /**
-     * Process the qtype/tcs element.
+     * Process the qtype/tcsjudgment element.
      *
-     * @param array|object $data tcs object to work with.
+     * @param array|object $data tcsjudgment object to work with.
      */
-    public function process_tcs($data) {
+    public function process_tcsjudgment($data) {
         global $DB;
 
         $data = (object)$data;
@@ -74,15 +74,15 @@ class restore_qtype_tcs_plugin extends restore_qtype_plugin {
         $questioncreated = (bool) $this->get_mappingid('question_created', $oldquestionid);
 
         // If the question has been created by restore, we need to create its
-        // qtype_tcs_options too.
+        // qtype_tcsjudgment_options too.
         if ($questioncreated) {
             $data->questionid = $newquestionid;
 
             // It is possible for old backup files to contain unique key violations.
             // We need to check to avoid that.
-            if (!$DB->record_exists('qtype_tcs_options', array('questionid' => $data->questionid))) {
-                $newitemid = $DB->insert_record('qtype_tcs_options', $data);
-                $this->set_mapping('qtype_tcs_options', $oldid, $newitemid);
+            if (!$DB->record_exists('qtype_tcsjudgment_options', array('questionid' => $data->questionid))) {
+                $newitemid = $DB->insert_record('qtype_tcsjudgment_options', $data);
+                $this->set_mapping('qtype_tcsjudgment_options', $oldid, $newitemid);
             }
         }
     }
@@ -119,7 +119,7 @@ class restore_qtype_tcs_plugin extends restore_qtype_plugin {
 
     /**
      * Given one question_states record, return the answer
-     * recoded pointing to all the restored stuff for tcs questions.
+     * recoded pointing to all the restored stuff for tcsjudgment questions.
      *
      * Answer are two (hypen speparated) lists of comma separated question_answers
      * the first to specify the order of the answers and the second to specify the
@@ -170,10 +170,10 @@ class restore_qtype_tcs_plugin extends restore_qtype_plugin {
         $contents = array();
 
         $fields = array('correctfeedback', 'partiallycorrectfeedback', 'incorrectfeedback');
-        $contents[] = new restore_decode_content('qtype_tcs_options',
-                $fields, 'qtype_tcs_options');
-        $contents[] = new restore_decode_content('qtype_tcs_options',
-                array('hypothisistext', 'effecttext'), 'qtype_tcs');
+        $contents[] = new restore_decode_content('qtype_tcsjudgment_options',
+                $fields, 'qtype_tcsjudgment_options');
+        $contents[] = new restore_decode_content('qtype_tcsjudgment_options',
+                array('hypothisistext'), 'qtype_tcsjudgment');
 
         return $contents;
     }

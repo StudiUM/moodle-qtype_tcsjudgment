@@ -15,20 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Privacy Subsystem implementation for qtype_tcs.
+ * Privacy Subsystem implementation for qtype_tcsjudgment.
  *
- * @package    qtype_tcs
+ * @package    qtype_tcsjudgment
  * @author     Issam Taboubi <issam.taboubi@umontreal.ca>
  * @copyright  2020 Université de Montréal
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace qtype_tcs\privacy;
+namespace qtype_tcsjudgment\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Privacy Subsystem for qtype_tcs implementing null_provider.
+ * Privacy Subsystem for qtype_tcsjudgment implementing null_provider.
  *
  * @author     Issam Taboubi <issam.taboubi@umontreal.ca>
  * @copyright  2020 Université de Montréal
