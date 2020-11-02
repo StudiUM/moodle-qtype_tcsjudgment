@@ -37,25 +37,22 @@ defined('MOODLE_INTERNAL') || die();
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_qtype_tcsjudgment_plugin extends restore_qtype_plugin {
+class restore_qtype_tcsjudgment_plugin extends restore_qtype_tcs_plugin {
 
     /**
-     * Returns the paths to be handled by the plugin at question level
+     * @var string The qtype name.
      */
-    protected function define_question_plugin_structure() {
-        $paths = array();
+    protected static $qtypename = 'tcsjudgment';
 
-        // This qtype uses question_answers, add them.
-        $this->add_question_question_answers($paths);
+    /**
+     * @var string The tcs table name.
+     */
+    protected static $tablename = 'qtype_tcsjudgment';
 
-        // Add own qtype stuff.
-        $elename = 'tcsjudgment';
-        // We used get_recommended_name() so this works.
-        $elepath = $this->get_pathfor('/tcsjudgment');
-        $paths[] = new restore_path_element($elename, $elepath);
-
-        return $paths; // And we return the interesting paths.
-    }
+    /**
+     * @var array The name of columns for decoding content.
+     */
+    protected static $optionsdecodecontent = ['hypothisistext'];
 
     /**
      * Process the qtype/tcsjudgment element.
@@ -63,118 +60,6 @@ class restore_qtype_tcsjudgment_plugin extends restore_qtype_plugin {
      * @param array|object $data tcsjudgment object to work with.
      */
     public function process_tcsjudgment($data) {
-        global $DB;
-
-        $data = (object)$data;
-        $oldid = $data->id;
-
-        // Detect if the question is created or mapped.
-        $oldquestionid   = $this->get_old_parentid('question');
-        $newquestionid   = $this->get_new_parentid('question');
-        $questioncreated = (bool) $this->get_mappingid('question_created', $oldquestionid);
-
-        // If the question has been created by restore, we need to create its
-        // qtype_tcsjudgment_options too.
-        if ($questioncreated) {
-            $data->questionid = $newquestionid;
-
-            // It is possible for old backup files to contain unique key violations.
-            // We need to check to avoid that.
-            if (!$DB->record_exists('qtype_tcsjudgment_options', array('questionid' => $data->questionid))) {
-                $newitemid = $DB->insert_record('qtype_tcsjudgment_options', $data);
-                $this->set_mapping('qtype_tcsjudgment_options', $oldid, $newitemid);
-            }
-        }
-    }
-
-    /**
-     * Do any re-coding necessary in the student response.
-     *
-     * @param int $questionid the new id of the question
-     * @param int $sequencenumber of the step within the qusetion attempt.
-     * @param array $response the response data from the backup.
-     * @return array the recoded response.
-     */
-    public function recode_response($questionid, $sequencenumber, array $response) {
-        if (array_key_exists('_order', $response)) {
-            $response['_order'] = $this->recode_choice_order($response['_order']);
-        }
-        return $response;
-    }
-
-    /**
-     * Recode the choice order as stored in the response.
-     * @param string $order the original order.
-     * @return string the recoded order.
-     */
-    protected function recode_choice_order($order) {
-        $neworder = array();
-        foreach (explode(',', $order) as $id) {
-            if ($newid = $this->get_mappingid('question_answer', $id)) {
-                $neworder[] = $newid;
-            }
-        }
-        return implode(',', $neworder);
-    }
-
-    /**
-     * Given one question_states record, return the answer
-     * recoded pointing to all the restored stuff for tcsjudgment questions.
-     *
-     * Answer are two (hypen speparated) lists of comma separated question_answers
-     * the first to specify the order of the answers and the second to specify the
-     * responses. Note the order list (the first one) can be optional.
-     *
-     * @param object $state the state to recode the answer of.
-     */
-    public function recode_legacy_state_answer($state) {
-        $answer = $state->answer;
-        $orderarr = array();
-        $responsesarr = array();
-        $lists = explode(':', $answer);
-        // If only 1 list, answer is missing the order list, adjust.
-        if (count($lists) == 1) {
-            $lists[1] = $lists[0]; // Here we have the responses.
-            $lists[0] = '';        // Here we have the order.
-        }
-        // Map order.
-        if (!empty($lists[0])) {
-            foreach (explode(',', $lists[0]) as $id) {
-                if ($newid = $this->get_mappingid('question_answer', $id)) {
-                    $orderarr[] = $newid;
-                }
-            }
-        }
-        // Map responses.
-        if (!empty($lists[1])) {
-            foreach (explode(',', $lists[1]) as $id) {
-                if ($newid = $this->get_mappingid('question_answer', $id)) {
-                    $responsesarr[] = $newid;
-                }
-            }
-        }
-        // Build the final answer, if not order, only responses.
-        $result = '';
-        if (empty($orderarr)) {
-            $result = implode(',', $responsesarr);
-        } else {
-            $result = implode(',', $orderarr) . ':' . implode(',', $responsesarr);
-        }
-        return $result;
-    }
-
-    /**
-     * Return the contents of this qtype to be processed by the links decoder.
-     */
-    public static function define_decode_contents() {
-        $contents = array();
-
-        $fields = array('correctfeedback', 'partiallycorrectfeedback', 'incorrectfeedback');
-        $contents[] = new restore_decode_content('qtype_tcsjudgment_options',
-                $fields, 'qtype_tcsjudgment_options');
-        $contents[] = new restore_decode_content('qtype_tcsjudgment_options',
-                array('hypothisistext'), 'qtype_tcsjudgment');
-
-        return $contents;
+        parent::process_tcs($data);
     }
 }

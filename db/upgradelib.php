@@ -21,7 +21,6 @@
  * @subpackage tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
- * @copyright  based on work by 2014 Julien Girardot <julien.girardot@actimage.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,92 +36,8 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
- * @copyright  based on work by 2014 Julien Girardot <julien.girardot@actimage.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_tcsjudgment_qe2_attempt_updater extends question_qtype_attempt_updater {
-    protected $order;
+class qtype_tcsjudgment_qe2_attempt_updater extends qtype_tcs_qe2_attempt_updater {
 
-    public function is_blank_answer($state) {
-        // Blank tcs judgment answers are not empty strings, they rather end in a colon.
-        return empty($state->answer) || substr($state->answer, -1) == ':';
-    }
-
-    public function right_answer() {
-        $max = 0;
-        $rightanswer = null;
-
-        foreach ($this->question->options->answers as $answer) {
-            if ($answer->fraction > $max) {
-                $max = $answer->fraction;
-                $rightanswer = $answer;
-            }
-        }
-
-        if (!empty($rightanswer)) {
-            return $this->to_text($rightanswer->answer);
-        }
-
-        return -1;
-    }
-
-    protected function explode_answer($answer) {
-        if (strpos($answer, ':') !== false) {
-            list($order, $responses) = explode(':', $answer);
-            return $responses;
-        } else {
-            // Sometimes, a bug means that a state is missing the <order>: bit,
-            // We need to deal with that.
-            $this->logger->log_assumption("Dealing with missing order information
-                    in attempt at tcs question {$this->question->id}");
-            return $answer;
-        }
-    }
-
-    public function response_summary($state) {
-        $responses = $this->explode_answer($state->answer);
-
-        if (is_numeric($responses)) {
-            if (array_key_exists($responses, $this->question->options->answers)) {
-                return $this->to_text($this->question->options->answers[$responses]->answer);
-            } else {
-                $this->logger->log_assumption("Dealing with a place where the
-                        student selected a choice that was later deleted for
-                        tcs judgment question {$this->question->id}");
-                return '[CHOICE THAT WAS LATER DELETED]';
-            }
-        } else {
-            return null;
-        }
-    }
-
-    public function was_answered($state) {
-        $responses = $this->explode_answer($state->answer);
-        return is_numeric($responses);
-    }
-
-    public function set_first_step_data_elements($state, &$data) {
-        if (!$state->answer) {
-            return;
-        }
-        list($order, $responses) = explode(':', $state->answer);
-        $data['_order'] = $order;
-        $this->order = explode(',', $order);
-    }
-
-    public function supply_missing_first_step_data(&$data) {
-        $data['_order'] = implode(',', array_keys($this->question->options->answers));
-    }
-
-    public function set_data_elements_for_step($state, &$data) {
-        $responses = $this->explode_answer($state->answer);
-        if (is_numeric($responses)) {
-            $flippedorder = array_combine(array_values($this->order), array_keys($this->order));
-            if (array_key_exists($responses, $flippedorder)) {
-                $data['answer'] = $flippedorder[$responses];
-            } else {
-                $data['answer'] = '-1';
-            }
-        }
-    }
 }

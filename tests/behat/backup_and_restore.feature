@@ -34,18 +34,20 @@ Feature: Test duplicating a quiz containing a Concordance of judgment question
       | Question name                 | TCS-001                            |
       | Question text                 | Here is the question               |
       | General feedback              | General feedback for the question  |
-      | showquestiontext              | No                                 |
+      | showquestiontext              | Yes                                |
       | id_labelsituation             | Situation label                    |
       | id_labelhypothisistext        | Hypothesis label                   |
       | id_hypothisistext             | The hypothesis is...               |
       | id_labelnewinformationeffect  | Your hypothesis or option is       |
       | id_labelfeedback              | Comments label                     |
-      | showfeedback                  | No                                 |
-      | id_fraction_0                 | 2                                  |
+      | showfeedback                  | Yes                                |
+      | id_fraction_0                 | 1                                  |
       | id_fraction_1                 | 2                                  |
-      | id_fraction_2                 | 0                                  |
-      | id_feedback_0                 | Feedback for answer 1              |
-      | id_feedback_1                 | Feedback for answer 2              |
-      | id_feedback_2                 |                                    |
+      | id_fraction_2                 | 3                                  |
+      | id_fraction_3                 | 4                                  |
+      | id_feedback_0                 | Feedback for choice 1              |
+      | id_feedback_1                 | Feedback for choice 2              |
+      | id_feedback_2                 | Feedback for choice 3              |
+      | id_feedback_3                 |                                    |
     And I should not see "New information"
 

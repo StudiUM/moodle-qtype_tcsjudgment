@@ -25,6 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
+require_once($CFG->dirroot . '/question/type/tcs/tests/helper.php');
+
 /**
  * Test helper class for the Concordance of judgment question type.
  *
@@ -32,7 +35,18 @@ defined('MOODLE_INTERNAL') || die();
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_tcsjudgment_test_helper extends question_test_helper {
+class qtype_tcsjudgment_test_helper extends qtype_tcs_test_helper {
+
+    /**
+     * @var string The qtype name.
+     */
+    protected static $qtypename = 'tcsjudgment';
+
+    /**
+     * @var int The default answers number.
+     */
+    protected static $nbanswers = 4;
+
     /**
      * Implements the parent function.
      *
@@ -49,68 +63,7 @@ class qtype_tcsjudgment_test_helper extends question_test_helper {
      * @return object
      */
     public static function get_tcsjudgment_question_data_judgment() {
-        global $USER;
-
-        $qdata = new stdClass();
-
-        $qdata->createdby = $USER->id;
-        $qdata->modifiedby = $USER->id;
-        $qdata->qtype = 'tcsjudgment';
-        $qdata->name = 'TCS-002';
-        $qdata->questiontext = 'Here is the question';
-        $qdata->questiontextformat = FORMAT_PLAIN;
-        $qdata->generalfeedback = 'General feedback for the question';
-        $qdata->generalfeedbackformat = FORMAT_PLAIN;
-
-        $qdata->showquestiontext = false;
-        $qdata->labelsituation = 'Situation label';
-        $qdata->labelhypothisistext = 'Hypothesis label';
-        $qdata->hypothisistext = 'The hypothesis is...';
-        $qdata->hypothisistextformat = FORMAT_PLAIN;
-        $qdata->labelnewinformationeffect = 'Your hypothesis or option is';
-        $qdata->labelfeedback = 'Comments label';
-        $qdata->showfeedback = false;
-
-        $qdata->options = new stdClass();
-        $qdata->options->correctfeedback =
-                test_question_maker::STANDARD_OVERALL_CORRECT_FEEDBACK;
-        $qdata->options->correctfeedbackformat = FORMAT_HTML;
-        $qdata->options->partiallycorrectfeedback =
-                test_question_maker::STANDARD_OVERALL_PARTIALLYCORRECT_FEEDBACK;
-        $qdata->options->partiallycorrectfeedbackformat = FORMAT_HTML;
-        $qdata->options->shownumcorrect = 1;
-        $qdata->options->incorrectfeedback =
-                test_question_maker::STANDARD_OVERALL_INCORRECT_FEEDBACK;
-        $qdata->options->incorrectfeedbackformat = FORMAT_HTML;
-
-        $qdata->options->answers = array(
-            13 => (object) array(
-                'id' => 13,
-                'answer' => 'Answer 1',
-                'answerformat' => FORMAT_PLAIN,
-                'fraction' => 2,
-                'feedback' => 'Feedback for answer 1',
-                'feedbackformat' => FORMAT_PLAIN,
-            ),
-            14 => (object) array(
-                'id' => 14,
-                'answer' => 'Answer 2',
-                'answerformat' => FORMAT_PLAIN,
-                'fraction' => 2,
-                'feedback' => 'Feedback for answer 2',
-                'feedbackformat' => FORMAT_PLAIN,
-            ),
-            15 => (object) array(
-                'id' => 15,
-                'answer' => 'Answer 3',
-                'answerformat' => FORMAT_PLAIN,
-                'fraction' => 0,
-                'feedback' => '',
-                'feedbackformat' => FORMAT_PLAIN,
-            )
-        );
-
-        return $qdata;
+        return parent::get_tcs_question_data_reasoning();
     }
 
     /**
@@ -118,60 +71,6 @@ class qtype_tcsjudgment_test_helper extends question_test_helper {
      * @return object
      */
     public static function get_tcsjudgment_question_form_data_judgment() {
-        $qdata = new stdClass();
-
-        $qdata->name = 'TCS-002';
-        $qdata->questiontext = array('text' => 'Here is the question', 'format' => FORMAT_PLAIN);
-        $qdata->generalfeedback = array('text' => 'General feedback for the question', 'format' => FORMAT_PLAIN);
-
-        $qdata->showquestiontext = false;
-        $qdata->labelsituation = 'Situation label';
-        $qdata->labelhypothisistext = 'Hypothesis label';
-        $qdata->hypothisistext = array('text' => 'The hypothesis is...', 'format' => FORMAT_PLAIN);
-        $qdata->labelnewinformationeffect = 'Your hypothesis or option is';
-        $qdata->labelfeedback = 'Comments label';
-        $qdata->showfeedback = false;
-
-        $qdata->correctfeedback = array('text' => test_question_maker::STANDARD_OVERALL_CORRECT_FEEDBACK,
-                                                 'format' => FORMAT_HTML);
-        $qdata->partiallycorrectfeedback = array('text' => test_question_maker::STANDARD_OVERALL_PARTIALLYCORRECT_FEEDBACK,
-                                                          'format' => FORMAT_HTML);
-        $qdata->shownumcorrect = 1;
-        $qdata->incorrectfeedback = array('text' => test_question_maker::STANDARD_OVERALL_INCORRECT_FEEDBACK,
-                                                   'format' => FORMAT_HTML);
-
-        $qdata->fraction = array('2', '2', '0');
-
-        $qdata->answer = array(
-            0 => array(
-                'text' => 'Answer 1',
-                'format' => FORMAT_PLAIN
-            ),
-            1 => array(
-                'text' => 'Answer 2',
-                'format' => FORMAT_PLAIN
-            ),
-            2 => array(
-                'text' => 'Answer 3',
-                'format' => FORMAT_PLAIN
-            )
-        );
-
-        $qdata->feedback = array(
-            0 => array(
-                'text' => 'Feedback for answer 1',
-                'format' => FORMAT_PLAIN
-            ),
-            1 => array(
-                'text' => 'Feedback for answer 2',
-                'format' => FORMAT_PLAIN
-            ),
-            2 => array(
-                'text' => '',
-                'format' => FORMAT_PLAIN
-            )
-        );
-
-        return $qdata;
+        return parent::get_tcs_question_form_data_reasoning();
     }
 }
