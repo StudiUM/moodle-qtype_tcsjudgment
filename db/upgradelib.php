@@ -17,20 +17,17 @@
 /**
  * Upgrade library code for the tcs judgment question type.
  *
- * @package    qtype
- * @subpackage tcsjudgment
+ * @package    qtype_tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * Class for converting attempt data for tcs judgment questions when upgrading
- * attempts to the new question engine.
+ * Class for converting attempt data for tcs judgment questions when upgrading attempts to the new question engine.
  *
  * This class is used by the code in question/engine/upgrade/upgradelib.php.
  *

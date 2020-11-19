@@ -51,7 +51,7 @@ class qtype_tcsjudgment_test_helper extends qtype_tcs_test_helper {
      * Implements the parent function.
      *
      * @return array of example question names that can be passed as the $which
-     * argument of {@link test_question_maker::make_question} when $qtype is
+     * argument of test_question_maker::make_question when $qtype is
      * this question type.
      */
     public function get_test_questions() {

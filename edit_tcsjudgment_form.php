@@ -17,8 +17,7 @@
 /**
  * Defines the editing form for the tcs judgment question type.
  *
- * @package qtype
- * @subpackage tcsjudgment
+ * @package qtype_tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -42,6 +41,11 @@ class qtype_tcsjudgment_edit_form extends qtype_tcs_edit_form {
      */
     protected static $nbanswers = 4;
 
+    /**
+     * Return the question type name.
+     * @return the question type name, should be the same as the name() method
+     *      in the question type class.
+     */
     public function qtype() {
         return 'tcsjudgment';
     }

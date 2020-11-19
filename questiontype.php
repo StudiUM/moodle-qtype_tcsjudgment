@@ -17,8 +17,7 @@
 /**
  * Question type class for the tcsjudgment question type.
  *
- * @package qtype
- * @subpackage tcsjudgment
+ * @package qtype_tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -52,6 +51,13 @@ class qtype_tcsjudgment extends qtype_tcs {
      */
     protected static $tablename = 'qtype_tcsjudgment';
 
+    /**
+     * Create an appropriate question_definition for the question of this type
+     * using data loaded from the database.
+     * @param object $questiondata the question data loaded from the database.
+     * @return question_definition an instance of the appropriate question_definition subclass.
+     *      Still needs to be initialised.
+     */
     protected function make_question_instance($questiondata) {
         question_bank::load_question_definition_classes($this->name());
         return new qtype_tcsjudgment_question();

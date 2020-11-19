@@ -17,8 +17,7 @@
 /**
  * tcs judgment question renderer class.
  *
- * @package qtype
- * @subpackage tcsjudgment
+ * @package qtype_tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -48,8 +47,7 @@ class qtype_tcsjudgment_renderer extends qtype_tcs_renderer {
 /**
  * A format renderer for tcs judgment questions where the student should use a plain input box.
  *
- * @package qtype
- * @subpackage tcsjudgment
+ * @package qtype_tcsjudgment
  * @copyright  2020 Université  de Montréal.
  * @author     Issam Taboubi <issam.taboubi@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

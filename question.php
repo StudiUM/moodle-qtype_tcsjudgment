@@ -17,8 +17,7 @@
 /**
  * Concordance of judgment question definition class.
  *
- * @package qtype
- * @subpackage tcsjudgment
+ * @package qtype_tcsjudgment
  * @copyright  2020 Université de Montréal
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
