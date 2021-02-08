@@ -37,6 +37,7 @@ Feature: Preview a Concordance of judgment question
     And I should not see "The new information is..."
     And I should see "Comments"
     And I click on "Completely unacceptable" "radio"
+    And I set the field "Comments label" to "Comment 1"
     And I press "Check"
     And I should see "The most popular answer is: Completely acceptable"
     And I should see that "1" panelists have answered "Completely unacceptable" for question "1"
