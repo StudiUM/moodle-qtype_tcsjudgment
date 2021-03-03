@@ -34,5 +34,20 @@ function xmldb_qtype_tcsjudgment_upgrade($oldversion) {
 
     $dbman = $DB->get_manager();
 
+    if ($oldversion < 2021030100) {
+
+        // Labelfeedback.
+        $table = new xmldb_table('qtype_tcsjudgment_options');
+
+        // Showoutsidefieldcompetence.
+        $field = new xmldb_field('showoutsidefieldcompetence', XMLDB_TYPE_INTEGER, '1', null, null, null, '0');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Tcs savepoint reached.
+        upgrade_plugin_savepoint(true, 2021030100, 'qtype', 'tcsjudgment');
+    }
+
     return true;
 }

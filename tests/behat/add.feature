@@ -21,24 +21,25 @@ Feature: Test creating a Concordance of judgment question
   @javascript
   Scenario: Create a Concordance of judgment question.
     When I add a "Concordance of judgment" question filling the form with:
-      | Question name            | TCS-002                            |
-      | Question text            | Here is the question               |
-      | General feedback         | General feedback for the question  |
-      | showquestiontext         | No                                 |
-      | labelhypothisistext      | Hypothesis label                   |
-      | id_hypothisistext        | The hypothesis is...               |
-      | labelnewinformationeffect| Your hypothesis or option is       |
-      | showfeedback             | No                                 |
-      | Choice 1                 | Answer 1                           |
-      | Choice 2                 | Answer 2                           |
-      | Choice 3                 | Answer 3                           |
-      | Choice 4                 |                                    |
-      | id_fraction_0            | 1                                  |
-      | id_fraction_1            | 2                                  |
-      | id_fraction_2            | 3                                  |
-      | id_fraction_3            |                                    |
-      | id_feedback_0            | Feedback for answer 1              |
-      | id_feedback_1            | Feedback for answer 2              |
-      | id_feedback_2            | Feedback for answer 3              |
-      | id_feedback_3            |                                    |
+      | Question name              | TCS-002                            |
+      | Question text              | Here is the question               |
+      | General feedback           | General feedback for the question  |
+      | showquestiontext           | No                                 |
+      | labelhypothisistext        | Hypothesis label                   |
+      | id_hypothisistext          | The hypothesis is...               |
+      | labelnewinformationeffect  | Your hypothesis or option is       |
+      | showfeedback               | No                                 |
+      | showoutsidefieldcompetence | No                                 |
+      | Choice 1                   | Answer 1                           |
+      | Choice 2                   | Answer 2                           |
+      | Choice 3                   | Answer 3                           |
+      | Choice 4                   |                                    |
+      | id_fraction_0              | 1                                  |
+      | id_fraction_1              | 2                                  |
+      | id_fraction_2              | 3                                  |
+      | id_fraction_3              |                                    |
+      | id_feedback_0              | Feedback for answer 1              |
+      | id_feedback_1              | Feedback for answer 2              |
+      | id_feedback_2              | Feedback for answer 3              |
+      | id_feedback_3              |                                    |
     Then I should see "TCS-002"

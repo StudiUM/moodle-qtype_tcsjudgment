@@ -48,4 +48,16 @@ Feature: Preview a Concordance of judgment question
     And I should see "Feedback for choice 3" for answer "Rather acceptable" of question "1"
     And I should see that "4" panelists have answered "Completely acceptable" for question "1"
     And I should see no comments for answer "Completely acceptable" of question "1"
+    And I press "Start again"
+    And I click on "This question is outside my field of competence" "checkbox"
+    And the "Completely unacceptable" "radio" should be disabled
+    And the "Rather unacceptable" "radio" should be disabled
+    And the "Rather acceptable" "radio" should be disabled
+    And the "Completely acceptable" "radio" should be disabled
+    And the "Comments label" "field" should be disabled
+    And I press "Check"
+    And I should see no comments for answer "Completely unacceptable" of question "1"
+    And I should see no comments for answer "Rather unacceptable" of question "1"
+    And I should see no comments for answer "Rather acceptable" of question "1"
+    And I should see no comments for answer "Completely acceptable" of question "1"
     And I switch to the main window
