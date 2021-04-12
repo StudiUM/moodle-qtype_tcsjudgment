@@ -56,8 +56,7 @@ Feature: Preview a Concordance of judgment question
     And the "Completely acceptable" "radio" should be disabled
     And the "Comments label" "field" should be disabled
     And I press "Check"
-    And I should see no comments for answer "Completely unacceptable" of question "1"
-    And I should see no comments for answer "Rather unacceptable" of question "1"
-    And I should see no comments for answer "Rather acceptable" of question "1"
-    And I should see no comments for answer "Completely acceptable" of question "1"
+    # User should still see the feedback.
+    And I should see that "1" panelists have answered "Completely unacceptable" for question "1"
+    And I should see "Feedback for choice 1" for answer "Completely unacceptable" of question "1"
     And I switch to the main window
