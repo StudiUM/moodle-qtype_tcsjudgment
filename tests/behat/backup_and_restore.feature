@@ -51,4 +51,3 @@ Feature: Test duplicating a quiz containing a Concordance of judgment question
       | id_feedback_2                 | Feedback for choice 3              |
       | id_feedback_3                 |                                    |
     And I should not see "New information"
-

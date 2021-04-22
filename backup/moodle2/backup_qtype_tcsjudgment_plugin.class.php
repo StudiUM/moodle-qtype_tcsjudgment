@@ -52,10 +52,10 @@ class backup_qtype_tcsjudgment_plugin extends backup_qtype_tcs_plugin {
     /**
      * @var array The additional columns names.
      */
-    protected static $additionalcolumnsnames = [];
+    protected static $addcolumnsnames = [];
 
     /**
      * @var array The additional file area mapping names.
      */
-    protected static $additionalfileareamappingnames = [];
+    protected static $addfileareamapnames = [];
 }
