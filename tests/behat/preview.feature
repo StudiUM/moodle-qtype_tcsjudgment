@@ -24,11 +24,11 @@ Feature: Preview a Concordance of judgment question
     And I am on "Course 1" course homepage
     And I navigate to "Question bank" in current page administration
 
-  @javascript @_switch_window
+  @javascript
   Scenario: Preview a Concordance of judgment question.
     Given I choose "Preview" action for "TCS-002" in the question bank
-    When I switch to "questionpreview" window
-    And I set the field "How questions behave" to "Immediate feedback"
+    And I switch to "questionpreview" window
+    When I set the field "How questions behave" to "Immediate feedback"
     And I press "Start again with these options"
     Then I should see "Situation"
     And I should see "Here is the question"
@@ -59,4 +59,3 @@ Feature: Preview a Concordance of judgment question
     # User should still see the feedback.
     And I should see that "1" panelists have answered "Completely unacceptable" for question "1"
     And I should see "Feedback for choice 1" for answer "Completely unacceptable" of question "1"
-    And I switch to the main window
