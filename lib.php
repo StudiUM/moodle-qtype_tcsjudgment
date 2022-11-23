@@ -25,9 +25,6 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
-
-
 /**
  * Checks file access for tcs judgment questions.
  * @package qtype_tcsjudgment

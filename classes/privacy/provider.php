@@ -14,22 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Privacy Subsystem implementation for qtype_tcsjudgment.
- *
- * @package    qtype_tcsjudgment
- * @author     Issam Taboubi <issam.taboubi@umontreal.ca>
- * @copyright  2020 Université de Montréal
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace qtype_tcsjudgment\privacy;
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for qtype_tcsjudgment implementing null_provider.
  *
+ * @package    qtype_tcsjudgment
  * @author     Issam Taboubi <issam.taboubi@umontreal.ca>
  * @copyright  2020 Université de Montréal
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

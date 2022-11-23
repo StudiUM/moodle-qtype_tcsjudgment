@@ -24,19 +24,6 @@
  * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-/**
- * Provides the information to restore Concordance questions.
- *
- * @package    qtype_tcsjudgment
- * @subpackage backup-moodle2
- * @category   backup
- * @copyright  2020 Université de Montréal
- * @author     Marie-Eve Lévesque <marie-eve.levesque.8@umontreal.ca>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class restore_qtype_tcsjudgment_plugin extends restore_qtype_tcs_plugin {
 
     /**

@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Unit tests for the tcs judgment question definition class.
  *
@@ -23,6 +22,10 @@
  * @author     Issam Taboubi <issa.taboubi@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+namespace qtype_tcsjudgment;
+
+use test_question_maker;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -36,8 +39,9 @@ require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
  * @copyright  2020 Université de Montréal
  * @author     Issam Taboubi <issa.taboubi@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers \qtype_tcsjudgment_question
  */
-class qtype_tcsjudgment_question_test extends advanced_testcase {
+class question_test extends \advanced_testcase {
 
     public function test_questiondata() {
         $question = test_question_maker::get_question_data('tcsjudgment');
