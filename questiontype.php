@@ -55,7 +55,7 @@ class qtype_tcsjudgment extends qtype_tcs {
      * Create an appropriate question_definition for the question of this type
      * using data loaded from the database.
      * @param object $questiondata the question data loaded from the database.
-     * @return question_definition an instance of the appropriate question_definition subclass.
+     * @return qtype_tcsjudgment_question an instance of the appropriate question_definition subclass.
      *      Still needs to be initialised.
      */
     protected function make_question_instance($questiondata) {

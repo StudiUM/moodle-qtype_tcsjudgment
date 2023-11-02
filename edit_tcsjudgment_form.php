@@ -43,7 +43,7 @@ class qtype_tcsjudgment_edit_form extends qtype_tcs_edit_form {
 
     /**
      * Return the question type name.
-     * @return the question type name, should be the same as the name() method
+     * @return string question type name, should be the same as the name() method
      *      in the question type class.
      */
     public function qtype() {
