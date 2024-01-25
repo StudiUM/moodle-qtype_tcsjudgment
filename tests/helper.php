@@ -55,7 +55,7 @@ class qtype_tcsjudgment_test_helper extends qtype_tcs_test_helper {
      * this question type.
      */
     public function get_test_questions() {
-        return array('judgment');
+        return ['judgment'];
     }
 
     /**

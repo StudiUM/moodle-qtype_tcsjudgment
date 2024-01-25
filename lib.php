@@ -38,7 +38,7 @@
  * @param array $options additional options affecting the file serving
  * @return void
  */
-function qtype_tcsjudgment_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=array()): void {
+function qtype_tcsjudgment_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=[]): void {
     global $CFG;
     require_once($CFG->libdir . '/questionlib.php');
     question_pluginfile($course, $context, 'qtype_tcsjudgment', $filearea, $args, $forcedownload, $options);
