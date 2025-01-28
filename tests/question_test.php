@@ -41,9 +41,9 @@ require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @covers \qtype_tcsjudgment_question
  */
-class question_test extends \advanced_testcase {
+final class question_test extends \advanced_testcase {
 
-    public function test_questiondata() {
+    public function test_questiondata(): void {
         $question = test_question_maker::get_question_data('tcsjudgment');
 
         $this->assertEquals('tcsjudgment', $question->qtype);
