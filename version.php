@@ -25,13 +25,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$plugin->version  = 2026050400;
+$plugin->requires = 2025100600;
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release = '1.1.0 (Build 2026050400)';
 $plugin->component = 'qtype_tcsjudgment';
-$plugin->version  = 2025012500;
-$plugin->requires = 2023100400;
-$plugin->release = '1.0.4 (Build 2025012500)';
 
 $plugin->dependencies = [
-    'qtype_tcs' => 2024012500,
+    'qtype_tcs' => 2026050400,
 ];
-
-$plugin->maturity  = MATURITY_STABLE;
